@@ -4,18 +4,23 @@ pybugsnag
 
 
 .. image:: https://badge.fury.io/py/pybugsnag.svg
-   :target: https://badge.fury.io/py/pybugsnag
-   :alt: PyPI version
+    :target: https://badge.fury.io/py/pybugsnag
+    :alt: PyPI version
 
 
 .. image:: https://travis-ci.org/jpetrucciani/pybugsnag.svg?branch=master
-   :target: https://travis-ci.org/jpetrucciani/pybugsnag
-   :alt: Build Status
+    :target: https://travis-ci.org/jpetrucciani/pybugsnag
+    :alt: Build Status
+
+
+.. image:: https://coveralls.io/repos/github/jpetrucciani/pybugsnag/badge.svg?branch=master
+    :target: https://coveralls.io/github/jpetrucciani/pybugsnag?branch=master
+    :alt: Coverage Status
 
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-   :target: https://github.com/ambv/black
-   :alt: Code style: black
+    :target: https://github.com/ambv/black
+    :alt: Code style: black
 
 
 A python wrapper for the Bugsnag Data Access API
