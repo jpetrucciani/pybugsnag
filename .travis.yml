@@ -1,0 +1,18 @@
+language: python
+dist: xenial
+python:
+  - '3.6'
+install:
+  - pip install -r requirements.txt
+  - pip install -r dev-requirements.txt
+script: make
+after_script: cd ~
+after_success: coveralls --verbose
+deploy:
+  provider: pypi
+  user: jacobi
+  on:
+    branch: master
+    tags: true
+  password:
+    secure: E8P4ExPSoMqU2gkvtkfrdckiN7K5USh6YOcZGjcPOIMcJFF/5bYLinilUVEb8KxqYiDpgl/g0LhZKJYjy7BzBCk3zYQhRHpKTb+jW+EdPS7EXjbSgIDUBA6KXb0T3Pn6Kq63M/xA1j+cJ1I5l5HElvMaYuvra3QIAfexlfxKlQLuPq3sW0ok8216f5dLe09FBwcnGubdXpThPQoqDv7RbBH9W++bUc3a/SXi5UaTlV2nvqcwuRrMs61rIjycB6eCngxjU9e7Siwn1VjG+FN4pcj2Z5n0VxpbaoO3YKYY0Br0fR+E9rSVa7mJ6aNvWLOk72CoboNNqW9OUpSND/Zn5luVJPjcyGcHUyAoBX5nM0EjbhtEhXrm8RUnyjGaBHB6KxJKEVb87di5difmIw2OIATbM8DXiYb+S6DizJ5fRn5OUy1/kHoQtCfNrykI1k/lYhUmFfq+tNTsvaeP5NEGF1Q/oPmm5o0//Ck34L5VAhLvfbb9KPLJrVcjDZgcKnggbr0wtnmenPVtMDMjQy8ZZFb9o5VQZl+x29pPt8CsMesSuXYiQBV8JuhunfwtZ62y1eu7ntnTWVzlo7i+UO3zhk/wEODa3+ml069mqKl7RrLeW50hdqStkD6pPnmJ0V051ffCh4KGIDge198CC95X25MDd6Ki+QwmqLT8Lcvv5UQ=
