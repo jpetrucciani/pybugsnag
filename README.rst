@@ -23,6 +23,11 @@ pybugsnag
     :alt: Code style: black
 
 
+.. image:: https://readthedocs.org/projects/pybugsnag/badge/?version=latest
+    :target: https://pybugsnag.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
+
 A python wrapper for the Bugsnag Data Access API
 
 COMING SOON!
@@ -43,4 +48,6 @@ Basic Usage
 
 .. code-block:: python
 
-   import pybugsnag
+   from pybugsnag import BugsnagDataAccessClient
+
+   bugsnag_client = BugsnagDataAccessClient("$ACCESS_TOKEN")
