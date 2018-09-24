@@ -5,7 +5,7 @@ import requests
 import urllib.parse
 from pybugsnag.globals import __version__, API_URL, LIBRARY, TEST_TOKEN, TEST_API_URL
 from pybugsnag.models.error import RateLimited
-from pybugsnag.models import Organization, User
+from pybugsnag.models import Organization, Project
 
 
 def test_client():
@@ -54,17 +54,20 @@ class BugsnagDataClient:
             raise RateLimited()
         return request
 
-    def get(self, path, **kwargs):
+    def get(self, path, raw=False, **kwargs):
         """makes a get request to the API"""
-        return self._req(path, **kwargs).json()
+        request = self._req(path, **kwargs)
+        return request if raw else request.json()
 
-    def post(self, path, **kwargs):
+    def post(self, path, raw=False, **kwargs):
         """makes a post request to the API"""
-        return self._req(path, method="post", **kwargs).json()
+        request = self._req(path, method="post", **kwargs)
+        return request if raw else request.json()
 
-    def put(self, path, **kwargs):
+    def put(self, path, raw=False, **kwargs):
         """makes a put request to the API"""
-        return self._req(path, method="put", **kwargs).json()
+        request = self._req(path, method="put", **kwargs)
+        return request if raw else request.json()
 
     @property
     def organizations(self):
@@ -74,3 +77,13 @@ class BugsnagDataClient:
                 Organization(x, client=self) for x in self.get("user/organizations")
             ]
         return self._organizations
+
+    def get_organization(self, organization_id):
+        """get organization info by organization_id"""
+        return Organization(
+            self.get("organization/{}".format(organization_id), client=self)
+        )
+
+    def get_project(self, project_id):
+        """gets a project by it's id"""
+        return Project(self.get("projects/{}".format(project_id)), client=self)

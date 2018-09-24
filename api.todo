@@ -1,0 +1,56 @@
+General:
+ ☐ gracefully handle api request errors - need to test how these return
+
+
+Collaborators:
+ ☐ view what projects this collaborator has access to
+
+
+Organizations:
+ ✔ list organizations @done (18-09-24 15:23)
+ ✔ list projects for an organization @done (18-09-24 15:23)
+ ✔ view collaborator by id @done (18-09-24 15:57)
+ ✔ list collaborators @done (18-09-24 15:57)
+ ✔ get admins count @done (18-09-24 16:07)
+ ✔ get organization by id @done (18-09-24 16:07)
+ ☐ update organization
+
+
+Projects:
+ ✔ list errors on a project @done (18-09-24 15:23)
+ ✔ list events on a project @done (18-09-24 15:27)
+ ✔ get a project by id @done (18-09-24 16:53)
+ ☐ update project
+ ✔ get an error by id @done (18-09-24 15:24)
+ ✔ get an event by id @done (18-09-24 15:24)
+ ☐ get collaborators per project
+ ☐ delete all errors in a project
+ ✔ list releases on a project @done (18-09-24 16:36)
+ ✔ get release by id @done (18-09-24 16:36)
+
+
+Errors:
+ ✔ list events for an error @done (18-09-24 15:27)
+ ✔ get latest event for an error @done (18-09-24 15:32)
+ ✔ get an event by id @done (18-09-24 15:28)
+ ☐ update an error
+ ☐ bulk update errors
+ ☐ delete an error
+
+
+Events:
+ ☐ delete an event
+
+
+Pivots:
+ ✔ list the pivots for an error @done (18-09-24 17:07)
+ ☐ list values of a pivot on an error
+ ✔ list pivots on a project @done (18-09-24 17:07)
+ ☐ list values of a pivot on a project
+
+
+Trends:
+ ✔ list trends for an error (buckets) @done (18-09-24 16:28)
+ ✔ list trends for an error (resolution) @done (18-09-24 16:28)
+ ✔ list the trends for a project (buckets) @done (18-09-24 16:28)
+ ✔ list the trends for a project (resolution) @done (18-09-24 16:28)
