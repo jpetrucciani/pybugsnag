@@ -32,7 +32,7 @@ pybugsnag
     :alt: Documentation Status
 
 
-A python wrapper for the ClickUp API
+A python wrapper for the Bugsnag Data Access API
 
 
 pybugsnag's source code hosted on `GitHub <https://github.com/jpetrucciani/pybugsnag>`_.
