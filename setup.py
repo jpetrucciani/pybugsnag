@@ -22,6 +22,7 @@ setup(
     download_url="https://github.com/jpetrucciani/{}.git".format(LIBRARY),
     license="LICENSE",
     packages=find_packages(),
+    install_requires=["requests"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.5",
