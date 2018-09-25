@@ -47,6 +47,15 @@ Basic Usage
 
 .. code-block:: python
 
-   from pybugsnag import BugsnagDataAccessClient
+    from pybugsnag import BugsnagDataClient
+    from pybugsnag.models import Error
 
-   bugsnag_client = BugsnagDataAccessClient("$ACCESS_TOKEN")
+    client = BugsnagDataClient("$AUTH_TOKEN")
+    organization = client.organizations[0]  # first organization for the auth token
+    project = organization.projects[0]  # first project in the organization
+    project.get_errors(
+        sort=Error.Sort.LAST_SEEN,
+        direction=Error.Sort.Direction.DESCENDING,
+        per_page=30,
+    )  # gets errors for this project, 
+    project.get_trend_buckets()  # data for a trend histogram
