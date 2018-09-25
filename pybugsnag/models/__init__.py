@@ -9,6 +9,7 @@ from pybugsnag.utils.text import (
     snakeify,
     dict_to_query_params,
     datetime_to_iso8601,
+    iso8601_to_datetime,
 )
 
 
@@ -48,6 +49,8 @@ class Collaborator(BaseModel):
 class Event(BaseModel):
     """bugsnag event object"""
 
+    DATE_FIELDS = ["received_at"]
+
     class Sort:
         """event sort enum"""
 
@@ -62,10 +65,30 @@ class Event(BaseModel):
     def __init__(self, data, **kwargs):
         """override"""
         super(Event, self).__init__(data, **kwargs)
+        for field in Event.DATE_FIELDS:
+            setattr(
+                self,
+                field,
+                iso8601_to_datetime(getattr(self, field), milliseconds=True),
+            )
 
     def __repr__(self):
         """repr"""
         return "<{}.Event[{}] '{}'>".format(LIBRARY, self.id, self.context)
+
+
+class EventField(BaseModel):
+    """bugsnag eventField object"""
+
+    def __init__(self, data, **kwargs):
+        """override"""
+        super(EventField, self).__init__(data, **kwargs)
+
+    def __repr__(self):
+        """repr"""
+        return "<{}.EventField[{}] '{}'>".format(
+            LIBRARY, self.display_id, self.filter_options["name"]
+        )
 
 
 class Pivot(BaseModel):
@@ -87,6 +110,7 @@ class Error(BaseModel):
 
     MIN_BUCKETS = 1
     MAX_BUCKETS = 50
+    DATE_FIELDS = ["first_seen", "last_seen", "first_seen_unfiltered"]
 
     class Resolution:
         """time resolution enum"""
@@ -122,6 +146,8 @@ class Error(BaseModel):
     def __init__(self, data, **kwargs):
         """override"""
         super(Error, self).__init__(data, **kwargs)
+        for field in Error.DATE_FIELDS:
+            setattr(self, field, iso8601_to_datetime(getattr(self, field)))
 
     def __repr__(self):
         """repr"""
@@ -234,6 +260,7 @@ class Project(BaseModel):
 
     MIN_BUCKETS = 1
     MAX_BUCKETS = 50
+    DATE_FIELDS = ["created_at", "updated_at"]
 
     class Resolution:
         """time resolution enum"""
@@ -258,6 +285,12 @@ class Project(BaseModel):
     def __init__(self, data, **kwargs):
         """override"""
         super(Project, self).__init__(data, **kwargs)
+        for field in Project.DATE_FIELDS:
+            setattr(
+                self,
+                field,
+                iso8601_to_datetime(getattr(self, field), milliseconds=True),
+            )
 
     def __repr__(self):
         """repr"""
@@ -317,7 +350,7 @@ class Project(BaseModel):
             params["base"] = datetime.now()
 
         query_params = dict_to_query_params(params)
-        path = "projects/{}/events{}".format(self.project.id, query_params)
+        path = "projects/{}/events{}".format(self.id, query_params)
         return [
             Event(x, project=self, client=self._client) for x in self._client.get(path)
         ]
@@ -377,9 +410,18 @@ class Project(BaseModel):
             )
         ]
 
+    def get_event_fields(self):
+        """gets a list of event fields for the project"""
+        return [
+            EventField(x, project=self, client=self._client)
+            for x in self._client.get("projects/{}/event_fields".format(self.id))
+        ]
+
 
 class Organization(BaseModel):
     """bugsnag organization object"""
+
+    DATE_FIELDS = ["created_at", "updated_at"]
 
     def __init__(self, data, **kwargs):
         """override"""
@@ -387,6 +429,12 @@ class Organization(BaseModel):
         self._projects = None
         self._collaborators = None
         self._admins_count = None
+        for field in Organization.DATE_FIELDS:
+            setattr(
+                self,
+                field,
+                iso8601_to_datetime(getattr(self, field), milliseconds=True),
+            )
 
     def __repr__(self):
         """repr"""

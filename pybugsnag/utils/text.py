@@ -6,6 +6,7 @@ from datetime import datetime
 
 
 DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
+DATE_FORMAT_MILLIS = "%Y-%m-%dT%H:%M:%S.%fZ"
 FIRST_CAP = re.compile("(.)([A-Z][a-z]+)")
 ALL_CAP = re.compile("([a-z0-9])([A-Z])")
 LOCALS_FILTER = ["self", "kwargs"]
@@ -15,16 +16,6 @@ def snakeify(text):
     """camelCase to snake_case"""
     first_string = FIRST_CAP.sub(r"\1_\2", text)
     return ALL_CAP.sub(r"\1_\2", first_string).lower()
-
-
-def ts_to_datetime(timestamp):
-    """converts the posix x1000 timestamp to a python datetime"""
-    return datetime.utcfromtimestamp(int(timestamp) / 1000)
-
-
-def datetime_to_ts(date_object):
-    """converts a datetime to a posix x1000 timestamp"""
-    return int(date_object.timestamp() * 1000)
 
 
 def filter_locals(local_variables, extras=None):
@@ -39,14 +30,16 @@ def filter_locals(local_variables, extras=None):
     }
 
 
-def datetime_to_iso8601(date_object):
+def datetime_to_iso8601(date_object, milliseconds=False):
     """converts a datetime to the time format bugsnag wants"""
-    return date_object.strftime(DATE_FORMAT)
+    return date_object.strftime(DATE_FORMAT_MILLIS if milliseconds else DATE_FORMAT)
 
 
-def iso8601_to_datetime(date_string):
+def iso8601_to_datetime(date_string, milliseconds=False):
     """converts a iso8601 string to a python datetime"""
-    return datetime.strptime(DATE_FORMAT, date_string)
+    return datetime.strptime(
+        date_string, DATE_FORMAT_MILLIS if milliseconds else DATE_FORMAT
+    )
 
 
 def dict_to_query_params(params):

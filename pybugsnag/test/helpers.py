@@ -9,11 +9,6 @@ from colorama import init, Fore, Style
 init()
 
 
-def manual_raise():
-    """manually raise an exception"""
-    raise SystemExit(1)
-
-
 def dbg(text):
     """debug printer for tests"""
     if isinstance(text, dict):

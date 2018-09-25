@@ -30,7 +30,6 @@ pybugsnag
 
 A python wrapper for the Bugsnag Data Access API
 
-COMING SOON!
 
 Quick start
 -----------
@@ -40,7 +39,7 @@ Installation
 
 .. code-block:: bash
 
-   # install pybugsnag
+   # install
    pip install pybugsnag
 
 Basic Usage

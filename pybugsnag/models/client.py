@@ -81,7 +81,7 @@ class BugsnagDataClient:
     def get_organization(self, organization_id):
         """get organization info by organization_id"""
         return Organization(
-            self.get("organization/{}".format(organization_id), client=self)
+            self.get("organizations/{}".format(organization_id)), client=self
         )
 
     def get_project(self, project_id):

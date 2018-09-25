@@ -27,6 +27,7 @@ Projects:
  ☐ delete all errors in a project
  ✔ list releases on a project @done (18-09-24 16:36)
  ✔ get release by id @done (18-09-24 16:36)
+ ✔ get event fields for a project @done (18-09-25 12:11)
 
 
 Errors:
